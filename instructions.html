@@ -210,7 +210,39 @@
     <label for="agree">I have read and understood the instructions in both languages.</label>
     <button onclick="handleProceed()">Proceed / आगे बढ़ें</button>
   </div>
+<script>
+  function verifyAndProceed() {
+    const reg = document.querySelector('input[name="reg_id"]').value;
+    const dob = document.querySelector('input[name="dob"]').value;
+    const captcha = document.querySelector('input[name="captcha"]').value;
+    const realCaptcha = document.getElementById("captchaText").innerText;
 
+    if (captcha !== realCaptcha) {
+      alert("❌ Invalid Captcha");
+      return;
+    }
+
+    // Call your PHP backend for reg+dob verification
+    fetch("https://mumtazpgcollegeclg2025.free.nf/verify.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `reg_id=${encodeURIComponent(reg)}&dob=${encodeURIComponent(dob)}`
+    })
+    .then(response => response.text())
+    .then(data => {
+      if (data.includes("form.html")) {
+        // ✅ Redirect to the form with reg ID
+        window.location.href = `https://mumtazpgcollegeclg2025.free.nf/form.html?reg=${encodeURIComponent(reg)}`;
+      } else {
+        alert("❌ Invalid Registration Number or DOB");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("⚠️ Server error, please try again later.");
+    });
+  }
+</script>
   <!-- Modal -->
   <div id="verifyModal" class="modal">
     <div class="modal-content">
