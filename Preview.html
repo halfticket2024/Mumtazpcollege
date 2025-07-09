@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Preview Application Form</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: maroon;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-top: 25px;
+      color: #333;
+      border-bottom: 1px solid #aaa;
+      padding-bottom: 5px;
+    }
+
+    .info p {
+      margin: 8px 0;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    button {
+      background: maroon;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: gray;
+    }
+
+    .declaration {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📝 Preview of Admission Form</h2>
+
+    <div class="section-title">Personal Details</div>
+    <div class="info">
+      <p><strong>Full Name:</strong> Rahul Kumar</p>
+      <p><strong>Father's Name:</strong> Mahesh Kumar</p>
+      <p><strong>Mother's Name:</strong> Sunita Devi</p>
+      <p><strong>Date of Birth:</strong> 10-04-2005</p>
+      <p><strong>Gender:</strong> Male</p>
+      <p><strong>Category:</strong> OBC</p>
+      <p><strong>Mobile:</strong> 9876543210</p>
+      <p><strong>Email:</strong> rahul@example.com</p>
+      <p><strong>Address:</strong> 123, Krishna Nagar, Lucknow</p>
+    </div>
+
+    <div class="section-title">Academic Details</div>
+    <div class="info">
+      <p><strong>Applying for:</strong> UG</p>
+      <p><strong>Course:</strong> B.A.</p>
+      <p><strong>Faculty:</strong> Arts</p>
+      <p><strong>10th %:</strong> 85%</p>
+      <p><strong>12th %:</strong> 80%</p>
+    </div>
+
+    <div class="section-title">Uploaded Documents</div>
+    <div class="info">
+      <p><strong>Photo:</strong> ✅ Uploaded</p>
+      <p><strong>Signature:</strong> ✅ Uploaded</p>
+      <p><strong>Govt. ID:</strong> Aadhar Card ✅ Uploaded</p>
+    </div>
+
+    <div class="declaration">
+      <p><strong>Declaration:</strong> I confirm all the information above is true. I understand I must pay ₹600 for final submission.</p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="history.back()">🔙 Edit Form</button>
+      <button onclick="window.location.href='payment.html'">💳 Proceed to Pay ₹600</button>
+    </div>
+  </div>
+
+</body>
+</html>

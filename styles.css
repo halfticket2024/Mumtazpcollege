@@ -1,0 +1,612 @@
+/* ==============================
+   General Body and Layout
+================================ */
+body {
+  font-family: "Times New Roman", Times, serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+/* ==============================
+   Header Section
+================================ */
+header {
+  background: maroon;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+/* ==============================
+   Navigation Menu
+================================ */
+nav {
+  background: #333;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  text-decoration: none;
+  background: maroon;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background: #555;
+}
+
+/* ==============================
+   Slider Section
+================================ */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: slideAnimation 12s infinite;
+}
+
+.slide img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+  display: block;
+}
+
+.slide:nth-child(1) { animation-delay: 0s; }
+.slide:nth-child(2) { animation-delay: 4s; }
+.slide:nth-child(3) { animation-delay: 8s; }
+
+@keyframes slideAnimation {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+<style>
+/* Hamburger button */
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+  padding: 10px;
+  background: maroon;
+  color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 230px;
+  background: maroon;
+  color: white;
+  padding-top: 60px;
+  transition: 0.3s;
+  z-index: 9999;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+}
+.sidebar a {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid #922;
+}
+.sidebar a:hover {
+  background-color: #a33;
+}
+
+/* Mobile Only */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  nav {
+    display: none;
+  }
+}
+
+  .message-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .message-box {
+    flex: 1;
+    background: #fff0f0;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid maroon;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+
+  .message-box img {
+    float: left;
+    margin-right: 15px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid maroon;
+  }
+  .scrolling-notice {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #fff3cd;
+  color: #d9534f;
+  padding: 10px 0;
+  border-top: 2px solid #f0ad4e;
+  border-bottom: 2px solid #f0ad4e;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+  position: relative;
+}
+
+.scrolling-notice span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+
+/* ==============================
+   Content Wrapper
+================================ */
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 20px;
+}
+
+/* ==============================
+   Main Content Section
+================================ */
+.main-content {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* ==============================
+   News Box
+================================ */
+.news-box {
+  background: white;
+  border: 2px solid maroon;
+  padding: 10px;
+  width: 250px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.news-box h3 {
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+  background: maroon;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.news-container {
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.news-items {
+  display: flex;
+  flex-direction: column;
+  animation: scrollNews 10s linear infinite;
+}
+
+.news-items div {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+}
+
+@keyframes scrollNews {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+
+/* ==============================
+   Info Boxes
+================================ */
+.info-boxes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+.info-box {
+  background: white;
+  border: 2px solid maroon;
+  border-radius: 8px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.info-box img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.info-box h4 {
+  margin: 0;
+  font-size: 16px;
+  color: maroon;
+}
+
+/* ==============================
+   Notice Section
+================================ */
+.notice-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.notice-box {
+  background: #f9f9f9;
+  border: 2px solid maroon;
+  padding: 15px;
+  width: 250px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.notice-box h4 {
+  margin-top: 0;
+  background: maroon;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.notice-box a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: maroon;
+  font-weight: bold;
+}
+
+.notice-box a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   Popup Banner
+================================ */
+.popup-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 600px;
+  width: 90%;
+  cursor: pointer;
+}
+
+.popup-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: maroon;
+  color: white;
+  font-size: 24px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+/* ==============================
+   Floating Blinking Button
+================================ */
+.apply-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: maroon;
+  color: white;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+.admission-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+.admission-box {
+  background: #fff;
+  border: 2px solid maroon;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.admission-box h3 {
+  margin: 0 0 10px;
+  color: maroon;
+}
+
+.admission-box p {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.admission-box ul {
+  text-align: left;
+  font-size: 13px;
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.admission-box button {
+  background: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admission-box button:hover {
+  background: darkgreen;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .admission-box {
+    width: 90%;
+  }
+}
+.lurns-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.lurns-box {
+  background: #fff;
+  border: 2px solid maroon;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.lurns-box img {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.lurns-box h3 {
+  margin: 10px 0;
+  color: maroon;
+}
+
+.lurns-box p {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.lurns-box button {
+  background: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lurns-box button:hover {
+  background: darkgreen;
+}
+
+.lurns-guideline {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.lurns-guideline button {
+  background: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lurns-guideline button:hover {
+  background: darkgreen;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .lurns-box {
+    width: 90%;
+  }
+}
+/* ==============================
+   Footer
+================================ */
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* ==============================
+   Responsive Styles
+================================ */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+  .news-box {
+    order: -1;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .main-content {
+    width: 100%;
+  }
+  .slider {
+    height: 200px;
+  }
+  .slide img {
+    height: 200px;
+  }
+  .popup-content {
+    width: 80%;
+    max-width: 80%;
+  }
+}
+/* ==============================
+   Map Box
+================================ */
+.map-box {
+  background: white;
+  border: 2px solid maroon;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.map-box:hover {
+  transform: scale(1.03);
+}
+
+.map-box h3 {
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+  background: maroon;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.map-container {
+  margin-top: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+<footer>
+  <p>&copy; 2025 Mumtaz P.G. College. All Rights Reserved.</p>
+  <div style="margin-top: 20px;">
+    <h3 style="margin-bottom:5px; color:white;">📍 College Location</h3>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=..." 
+      width="100%" 
+      height="250" 
+      style="border:0; border-radius:5px;"
+      allowfullscreen="" 
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</footer>

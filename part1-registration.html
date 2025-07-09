@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admission Information</title>
+  <style>
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal Box */
+.modal-box {
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+  text-align: center;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 12px; right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Upload Button */
+.upload-btn {
+  background: maroon;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button Style */
+.lurn-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+    body { font-family: Arial; margin: 20px; }
+    button { background: maroon; color:white; padding:10px 20px; border:none; border-radius:4px; }
+  </style>
+</head>
+<body>
+<head>
+  <meta charset="UTF-8">
+  <title>Mumtaz P.G. College</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="College Logo" style="height:80px;">
+    <h1>Mumtaz P.G. College, Lucknow</h1>
+    <p>ASSOCIATED TO LUCKNOW UNIV & AIDED BY UP GOVERNMENT</p>
+  </header>
+  <!-- Navigation -->
+  <nav>
+    <a href="#">🏠 Home</a>
+    <a href="#">👥 Management Board</a>
+    <a href="#">ℹ️ About Us</a>
+    <a href="#">📚 Courses</a>
+    <a href="admission-info.html">📝 Admission</a>
+    <a href="#">📞 Contact</a>
+    <a href="#">👤 Committees</a>
+    <a href="#">🖼️ Photo Gallery</a>
+  </nav>
+  <div class="lurns-container">
+  <div class="lurns-box">
+    <img src="lucknow-university-logo.png" alt="Lucknow University Logo">
+    <h3>Generate LURNS</h3>
+    <p>
+      लखनऊ विश्वविद्यालय में प्रवेश के लिए आवेदन करने हेतु LURNS बनाना अनिवार्य है।<br>
+      यह एक बार बनता है और सभी कोर्सेस में उपयोग होता है।
+    </p>
+    <button onclick="window.location.href='https://lkounivadm.samarth.edu.in/index.php/registration/user/register'">
+      Click Here to Generate LURNS
+    </button>
+  </div>
+
+  <div class="lurns-box">
+    <img src="college-logo.png" alt="College Logo">
+    <h3>If LURNS Already Generated</h3>
+    <p>
+      यदि LURNS पहले से जनरेट है, तो यहाँ से पंजीकरण फॉर्म भरें और आवश्यक डॉक्यूमेंट अपलोड करें।
+    </p>
+<button class="lurn-btn" onclick="openLurnPopup()">🚀 Proceed with LURNS</button>
+</button>
+  </div>
+</div>
+
+<div class="lurns-guideline">
+  <button onclick="window.location.href='lurns-guideline.pdf'">
+    Click here for Guideline: LURNS Registration Process
+  </button>
+</div>
+  </script>
+  <script>
+function openLurnPopup() {
+  document.getElementById("lurnModal").style.display = "flex";
+}
+function closeLurnPopup() {
+  document.getElementById("lurnModal").style.display = "none";
+}
+</script>
+</script>
+  <form action="upload-lurn.php" method="POST" enctype="multipart/form-data">
+  <div id="lurnModal" class="modal-overlay">
+    <div class="modal-box">
+      <span class="close-btn" onclick="closeLurnPopup()">&times;</span>
+      <h2>🔐 Proceed with LURNS</h2>
+      <p>Please enter your LURN number and upload your LURN application PDF.</p>
+
+      <input type="text" name="lurn" placeholder="Enter your LURN Number" required />
+      <input type="file" name="lurn_pdf" accept=".pdf" required />
+
+      <button type="submit" class="upload-btn">Upload</button>
+    </div>
+  </div>
+</form>
+    </form>
+  </div>
+</div>
+</body>
+</html>
