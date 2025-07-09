@@ -69,6 +69,95 @@
       font-size: 16px;
     }
 
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      font-family: "Times New Roman", serif;
+    }
+
+    .modal-content {
+      background: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 450px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+    }
+
+    .logo {
+      height: 60px;
+      margin-right: 10px;
+    }
+
+    .college-name h2 {
+      margin: 0;
+      font-size: 20px;
+      color: maroon;
+    }
+
+    .college-name p {
+      margin: 2px 0;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 22px;
+      cursor: pointer;
+      color: red;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="date"] {
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .captcha-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .captcha-display {
+      padding: 8px 12px;
+      font-weight: bold;
+      font-size: 18px;
+      background: #eee;
+      letter-spacing: 2px;
+    }
+
+    .verify-btn {
+      background: maroon;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
     @media (max-width: 768px) {
       .instructions-wrapper {
         flex-direction: column;
@@ -88,8 +177,6 @@
 
   <!-- Instructions -->
   <div class="instructions-wrapper">
-    
-    <!-- English Instructions -->
     <div class="instructions-box">
       <h2>📋 Instructions (English)</h2>
       <ul>
@@ -103,7 +190,6 @@
       </ul>
     </div>
 
-    <!-- Hindi Instructions -->
     <div class="instructions-box">
       <h2>📋 निर्देश (हिंदी)</h2>
       <ul>
@@ -122,19 +208,76 @@
   <div class="checkbox">
     <input type="checkbox" id="agree">
     <label for="agree">I have read and understood the instructions in both languages.</label>
-    <button onclick="proceed()">Proceed / आगे बढ़ें</button>
+    <button onclick="handleProceed()">Proceed / आगे बढ़ें</button>
   </div>
 
+  <!-- Modal -->
+  <div id="verifyModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <div class="college-name">
+          <h2>Mumtaz P.G. College, Lucknow</h2>
+          <p>Associated to Lucknow Univ & Aided by UP Government</p>
+        </div>
+      </div>
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>🔐 Verify to Proceed</h3>
+      <form method="POST" action="verify.php" onsubmit="return validateForm()">
+        <label>Registration ID:</label>
+        <input type="text" name="reg_id" required>
+
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" required>
+
+        <label>Enter Captcha:</label>
+        <div class="captcha-row">
+          <span id="captchaDisplay" class="captcha-display">ABC123</span>
+          <button type="button" onclick="generateCaptcha()">↻</button>
+        </div>
+        <input type="text" id="captchaInput" placeholder="Enter above captcha" required>
+        <input type="hidden" id="captchaCode" name="captcha_code" value="">
+
+        <button type="submit" class="verify-btn">Verify & Proceed</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script>
-    function proceed() {
-      const check = document.getElementById("agree");
-      if (!check.checked) {
-        alert("कृपया पहले सभी निर्देश पढ़ें और चेकबॉक्स टिक करें।");
+    function handleProceed() {
+      const agree = document.getElementById("agree");
+      if (!agree.checked) {
+        alert("कृपया निर्देशों को पढ़कर टिक करें।");
       } else {
-        window.location.href = "Admission form.html";
+        openModal();
       }
     }
-  </script>
 
+    function openModal() {
+      document.getElementById("verifyModal").style.display = "block";
+      generateCaptcha();
+    }
+
+    function closeModal() {
+      document.getElementById("verifyModal").style.display = "none";
+    }
+
+    function generateCaptcha() {
+      const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+      document.getElementById("captchaDisplay").innerText = code;
+      document.getElementById("captchaCode").value = code;
+    }
+
+    function validateForm() {
+      const userInput = document.getElementById("captchaInput").value.trim().toUpperCase();
+      const actual = document.getElementById("captchaCode").value.trim().toUpperCase();
+      if (userInput !== actual) {
+        alert("Captcha incorrect!");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>
