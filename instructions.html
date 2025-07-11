@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <title>Online Admission Instructions</title>
+  <style>
+    body { font-family: "Times New Roman", serif; background: #f5f5f5; margin: 0; padding: 20px; }
+    header { background: maroon; color: white; padding: 20px; text-align: center; }
+    .instructions-wrapper { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .instructions-box { background: #fff; border: 1px solid #ddd; border-radius: 5px; padding: 20px; width: 100%; max-width: 400px; box-shadow: 0 0 5px rgba(0,0,0,0.1); flex: 1; }
+    .instructions-box h2 { color: maroon; text-align: center; }
+    .instructions-box ul { list-style: none; padding: 0; line-height: 1.7; }
+    .checkbox { margin-top: 20px; max-width: 800px; margin-inline: auto; background: white; padding: 20px; border-radius: 5px; border: 1px solid #ccc; }
+    button { margin-top: 20px; padding: 10px 15px; background: #4caf50; color: #fff; border: none; border-radius: 3px; cursor: pointer; width: 100%; font-size: 16px; }
+    .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); font-family: "Times New Roman", serif; }
+    .modal-content { background: #fff; margin: 5% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); position: relative; }
+    .modal-header { display: flex; align-items: center; border-bottom: 1px solid #ccc; margin-bottom: 15px; padding-bottom: 10px; }
+    .logo { height: 60px; margin-right: 10px; }
+    .college-name h2 { margin: 0; font-size: 20px; color: maroon; }
+    .college-name p { margin: 2px 0; font-size: 12px; color: #333; }
+    .close { position: absolute; right: 15px; top: 15px; font-size: 22px; cursor: pointer; color: red; }
+    .modal-content input[type="text"], .modal-content select { padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
+    .captcha-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .captcha-display { padding: 8px 12px; font-weight: bold; font-size: 18px; background: #eee; letter-spacing: 2px; }
+    .verify-btn { background: maroon; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+    @media (max-width: 768px) { .instructions-wrapper { flex-direction: column; align-items: center; } }
+  </style>
+</head>
+<body>
+<header>
+  <img src="logo.png" alt="College Logo" style="height:80px;">
+  <h1>Mumtaz P.G. College, Lucknow</h1>
+  <p>ASSOCIATED TO LUCKNOW UNIV & AIDED BY UP GOVERNMENT</p>
+</header>
+<div class="instructions-wrapper">
+  <div class="instructions-box">
+    <h2>📋 Instructions (English)</h2>
+    <ul>
+      <li>1. Please read all instructions carefully before filling out the form.</li>
+      <li>2. Keep scanned copies of Photograph, Signature, Marksheet, etc. ready.</li>
+      <li>3. Photograph and Signature must be JPG/JPEG format, under 100KB.</li>
+      <li>4. Intermediate Marksheet and Weightage Certificate under 120KB.</li>
+      <li>5. Use your own or parents' mobile number only.</li>
+      <li>6. Verify all details before final submission.</li>
+      <li>7. Save confirmation page and payment proof for reference.</li>
+    </ul>
+  </div>
+  <div class="instructions-box">
+    <h2>📋 निर्देश (Hindi)</h2>
+    <ul>
+      <li>1. फॉर्म भरने से पहले सभी निर्देश ध्यान से पढ़ें।</li>
+      <li>2. फ़ोटो, हस्ताक्षर, मार्कशीट आदि की स्कैन कॉपी तैयार रखें।</li>
+      <li>3. फ़ोटो और हस्ताक्षर JPG/JPEG फॉर्मैट में, 100KB से कम हो।</li>
+      <li>4. इंटर की मार्कशीट और वेटेज सर्टिफिकेट 120KB से कम हो।</li>
+      <li>5. केवल अपना या अभिभावकों का मोबाइल नंबर दें।</li>
+      <li>6. सबमिट करने से पहले सभी जानकारी जांच लें।</li>
+      <li>7. भुगतान रसीद और कन्फ़र्मेशन पेज सेव करके रखें।</li>
+    </ul>
+  </div>
+</div>
+<div class="checkbox">
+  <input type="checkbox" id="agree">
+  <label for="agree">I have read and understood the instructions in both languages.</label>
+  <button onclick="handleProceed()">Proceed / आगे बढ़ें</button>
+</div>
+<div id="verifyModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <img src="logo.png" alt="Logo" class="logo">
+      <div class="college-name">
+        <h2>Mumtaz P.G. College, Lucknow</h2>
+        <p>Associated to Lucknow Univ & Aided by UP Government</p>
+      </div>
+    </div>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>🔐 Verify to Proceed</h3><label>Payment Mode:</label>
+<select id="paymentModeInput" required>
+  <option value="">-- Select Payment Mode --</option>
+  <option value="offline">Offline</option>
+  <option value="online">Online</option>
+</select>
+
+<label>Challan Number:</label>
+<input type="text" id="regInput" required>
+
+<label>Select Course:</label>
+<select id="courseInput" required>
+  <option value="">-- Select Course --</option>
+  <option value="BA">B.A.</option>
+  <option value="BCom">B.Com</option>
+  <option value="BSc">B.Sc</option>
+  <option value="MA">M.A.</option>
+</select>
+
+<label>Enter Captcha:</label>
+<div class="captcha-row">
+  <span id="captchaDisplay" class="captcha-display">ABC123</span>
+  <button type="button" onclick="generateCaptcha()">↻</button>
+</div>
+<input type="text" id="captchaInput" placeholder="Enter above captcha" required>
+
+<button onclick="verifyAndProceed()" class="verify-btn">Verify & Proceed</button>
+
+  </div>
+</div>
+<script>
+  function handleProceed() {
+    const agree = document.getElementById("agree");
+    if (!agree.checked) {
+      alert("कृपया निर्देशों को पढ़कर टिक करें");
+    } else {
+      openModal();
+    }
+  }function openModal() { document.getElementById("verifyModal").style.display = "block"; generateCaptcha(); }
+
+function closeModal() { document.getElementById("verifyModal").style.display = "none"; }
+
+function generateCaptcha() { const code = Math.random().toString(36).substring(2, 8).toUpperCase(); document.getElementById("captchaDisplay").innerText = code; }
+
+function verifyAndProceed() { const paymentMode = document.getElementById("paymentModeInput").value.trim(); const reg = document.getElementById("regInput").value.trim(); const course = document.getElementById("courseInput").value.trim(); const userCaptcha = document.getElementById("captchaInput").value.trim().toUpperCase(); const actualCaptcha = document.getElementById("captchaDisplay").innerText.trim().toUpperCase();
+
+if (!paymentMode || !reg || !course || !userCaptcha) {
+  alert("Please fill all fields.");
+  return;
+}
+
+if (userCaptcha !== actualCaptcha) {
+  alert("Captcha incorrect!");
+  return;
+}
+
+fetch("https://mumtazpgcollegeclg2025.free.nf/verify.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: `reg_id=${encodeURIComponent(reg)}&course=${encodeURIComponent(course)}&mode=${encodeURIComponent(paymentMode)}`
+})
+.then(res => res.text())
+.then(data => {
+  if (data.includes("form.html")) {
+    window.location.href = `https://mumtazpgcollegeclg2025.free.nf/form.html?reg=${encodeURIComponent(reg)}&course=${encodeURIComponent(course)}&mode=${encodeURIComponent(paymentMode)}`;
+  } else {
+    alert("Invalid details. Please check Challan Number, Course, or Payment Mode");
+  }
+})
+.catch(err => {
+  console.error(err);
+  alert("Server error. Try again.");
+});
+
+} </script>
+
+</body>
+</html>
